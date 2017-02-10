@@ -67,11 +67,21 @@ class SQLObject
   end
 
   def attribute_values
-    # ...
+    @attributes.values
   end
 
   def insert
-    # ...
+    cols_without_id = self.class.columns.drop(1)
+    col_names = cols_without_id.join(', ')
+    question_marks = (['?'] * cols_without_id.length).join(', ')
+    first_line = "#{self.class.table_name} (#{col_names})"
+    qs = "(#{question_marks})"
+    DBConnection.execute(<<-SQL, attribute_values)
+      INSERT INTO
+        cats (name, owner_id)
+      VALUES
+        (?, ?)
+    SQL
   end
 
   def update
