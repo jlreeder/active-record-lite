@@ -92,16 +92,14 @@ class SQLObject
   end
 
   def update
-    attribute_values
-    col_names = self.class.columns
-    zip = col_names.zip(attribute_values)
-    vals = zip.map { |k, v| "#{k} = '#{v}'" }
-    sql_line = vals.join(', ')
+    cols_atts = self.class.columns.zip(attribute_values)
+    set_line = cols_atts.map { |k, v| "#{k} = '#{v}'" }.join(', ')
+
     DBConnection.execute(<<-SQL)
       UPDATE
         #{self.class.table_name}
       SET
-        #{sql_line}
+        #{set_line}
       WHERE
         id = #{id}
     SQL
