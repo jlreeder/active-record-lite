@@ -49,7 +49,7 @@ class SQLObject
   end
 
   def self.find(id)
-    # ...
+    all.find { |instance| instance.id == id }
   end
 
   def initialize(params = {})
