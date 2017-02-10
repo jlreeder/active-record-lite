@@ -3,16 +3,18 @@ require_relative '01_sql_object'
 
 module Searchable
   def where(params)
-    matches = DBConnection.execute(<<-SQL)
+    where_line = params.keys.map { |k| "#{k} = ?"  }.join(' AND ')
+
+    matches = DBConnection.execute(<<-SQL, params.values)
       SELECT
         *
       FROM
         cats
       WHERE
-        name = 'Breakfast'
+        #{where_line}
     SQL
 
-    matches.map { |res| new(res) }
+    matches.map { |match| new(match) }
   end
 end
 
