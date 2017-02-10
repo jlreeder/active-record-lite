@@ -30,7 +30,11 @@ end
 
 class HasManyOptions < AssocOptions
   def initialize(name, self_class_name, options = {})
-    # ...
+    options.each { |k, v| send("#{k}=", v) }
+
+    @foreign_key ||= "#{self_class_name.tableize.singularize}_id".to_sym
+    @primary_key ||= :id
+    @class_name ||= name.camelcase.singularize
   end
 end
 
