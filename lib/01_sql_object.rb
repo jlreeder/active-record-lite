@@ -66,6 +66,11 @@ class SQLObject
     @attributes ||= {}
   end
 
+  # TODO: The instructions describe this differently
+  # * I wrote a `SQLObject#attribute_values` method that returns an array
+  # of the values for each attribute. I did this by calling `Array#map`
+  # on `SQLObject::columns`, calling `send` on the instance to get
+  # the value.
   def attribute_values
     @attributes.values
   end
