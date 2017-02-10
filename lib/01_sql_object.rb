@@ -92,11 +92,16 @@ class SQLObject
   end
 
   def update
+    attribute_values
+    col_names = self.class.columns
+    zip = col_names.zip(attribute_values)
+    vals = zip.map { |k, v| "#{k} = '#{v}'" }
+    sql_line = vals.join(', ')
     DBConnection.execute(<<-SQL)
       UPDATE
         #{self.class.table_name}
       SET
-        fname = 'Matthew', lname = 'von Rubens'
+        #{sql_line}
       WHERE
         id = #{id}
     SQL
