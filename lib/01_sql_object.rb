@@ -11,7 +11,7 @@ class SQLObject
       SELECT
         *
       FROM
-        cats
+        "#{table_name}"
     SQL
   end
 
