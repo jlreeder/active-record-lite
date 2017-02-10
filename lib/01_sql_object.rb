@@ -80,12 +80,11 @@ class SQLObject
     col_names = cols_without_id.join(', ')
     question_marks = (['?'] * cols_without_id.length).join(', ')
     first_line = "#{self.class.table_name} (#{col_names})"
-    qs = "(#{question_marks})"
     DBConnection.execute(<<-SQL, attribute_values)
       INSERT INTO
         #{self.class.table_name} (name, owner_id)
       VALUES
-        (?, ?)
+        (#{question_marks})
     SQL
   end
 
