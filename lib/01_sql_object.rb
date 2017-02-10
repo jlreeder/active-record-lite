@@ -92,7 +92,14 @@ class SQLObject
   end
 
   def update
-    # ...
+    DBConnection.execute(<<-SQL)
+      UPDATE
+        humans
+      SET
+        fname = 'Matthew', lname = 'von Rubens'
+      WHERE
+        id = 2
+    SQL
   end
 
   def save
