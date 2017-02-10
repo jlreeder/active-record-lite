@@ -54,9 +54,8 @@ class SQLObject
 
   def initialize(params = {})
     params.each do |k, v|
-      # TODO: Why set it to a symbol?
-      k_sym = k.to_sym
-      raise "unknown attribute '#{k}'" unless self.class.columns.include?(k_sym)
+      cols = self.class.columns
+      raise "unknown attribute '#{k}'" unless cols.include?(k.to_sym)
 
       send("#{k}=", v)
     end
