@@ -32,6 +32,11 @@ describe 'AssocOptions' do
       expect(options.primary_key).to eq(:id)
     end
 
+    it 'properly snake cases' do
+      options = HasManyOptions.new('wins', 'HumanPlayer')
+      expect(options.foreign_key).to eq(:human_player_id)
+    end
+
     it 'allows overrides' do
       options = HasManyOptions.new('cats', 'Human',
                                    foreign_key: :owner_id,
