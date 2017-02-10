@@ -16,6 +16,15 @@ class SQLObject
   end
 
   def self.finalize!
+    columns.each do |column|
+      define_method column.to_sym do
+        attributes[column]
+      end
+
+      define_method "#{column}=" do |value|
+        attributes[column] = value
+      end
+    end
   end
 
   def self.table_name=(table_name)
@@ -39,11 +48,10 @@ class SQLObject
   end
 
   def initialize(params = {})
-    # ...
   end
 
   def attributes
-    # ...
+    @attributes ||= {}
   end
 
   def attribute_values
