@@ -83,7 +83,7 @@ class SQLObject
     qs = "(#{question_marks})"
     DBConnection.execute(<<-SQL, attribute_values)
       INSERT INTO
-        "#{self.class.table_name}" (name, owner_id)
+        #{self.class.table_name} (name, owner_id)
       VALUES
         (?, ?)
     SQL
