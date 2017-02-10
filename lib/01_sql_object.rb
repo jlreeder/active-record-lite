@@ -86,6 +86,9 @@ class SQLObject
       VALUES
         (#{question_marks})
     SQL
+
+    # TODO: Why doesn't `@id = ` work?
+    self.id = DBConnection.last_insert_row_id
   end
 
   def update
