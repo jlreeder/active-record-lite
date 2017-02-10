@@ -24,7 +24,7 @@ class BelongsToOptions < AssocOptions
 
     @foreign_key ||= "#{name}_id".to_sym
     @primary_key ||= :id
-    @class_name ||= name.camelcase
+    @class_name ||= name.to_s.camelcase
   end
 end
 
@@ -34,7 +34,7 @@ class HasManyOptions < AssocOptions
 
     @foreign_key ||= "#{self_class_name.underscore}_id".to_sym
     @primary_key ||= :id
-    @class_name ||= name.camelcase.singularize
+    @class_name ||= name.to_s.camelcase.singularize
   end
 end
 
