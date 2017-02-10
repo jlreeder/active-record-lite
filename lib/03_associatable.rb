@@ -58,7 +58,7 @@ module Associatable
       class_to_query = options.model_class
       fkey = options.foreign_key
 
-      class_to_query.where(owner_id: self.id)
+      class_to_query.where(fkey => self.id)
     end
   end
 
