@@ -7,7 +7,16 @@ require 'byebug'
 
 class SQLObject
   def self.columns
-    # ...
+    return @columns if @columns
+
+    rows = DBConnection.execute2(<<-SQL)
+      SELECT
+        *
+      FROM
+        cats
+    SQL
+
+    @columns = rows.first.map(&:to_sym)
   end
 
   def self.finalize!
