@@ -94,11 +94,11 @@ class SQLObject
   def update
     DBConnection.execute(<<-SQL)
       UPDATE
-        humans
+        #{self.class.table_name}
       SET
         fname = 'Matthew', lname = 'von Rubens'
       WHERE
-        id = 2
+        id = #{id}
     SQL
   end
 
