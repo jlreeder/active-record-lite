@@ -52,7 +52,7 @@ module Associatable
   end
 
   def has_many(name, options = {})
-    options = HasManyOptions.new(name, self.class.name, options)
+    options = HasManyOptions.new(name, self.name, options)
 
     define_method(name) do
       class_to_query = options.model_class
