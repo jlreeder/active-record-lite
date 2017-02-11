@@ -9,7 +9,7 @@ module Searchable
       SELECT
         *
       FROM
-        cats
+        #{self.table_name}
       WHERE
         #{where_line}
     SQL
